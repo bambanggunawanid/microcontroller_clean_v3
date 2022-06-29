@@ -256,7 +256,6 @@ void ReadSendClientMultiHop(uint16_t node_client, RF24NetworkHeader headerToSend
         Serial.print(CopyFromClient[address]);
         Serial.print("->node_");
         Serial.print(this_node);
-        Serial.println("->sink_node");
         Serial.print("Weight: ");
         Serial.println(CopyFromClient[weight]);
     }

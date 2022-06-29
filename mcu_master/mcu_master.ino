@@ -82,8 +82,9 @@ void loop()
     { // If data comes from Node 01
       name_chair = "node_01";
       datasensor = incomingData[0];
-      Serial.print("From: ");
-      Serial.println(incomingData[1]);
+      Serial.print(name_chair);
+      Serial.print(incomingData[1]);
+      Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
     }
@@ -91,8 +92,9 @@ void loop()
     { // If data comes from Node 02
       name_chair = "node_02";
       datasensor = incomingData[0];
-      Serial.print("From: ");
-      Serial.println(incomingData[1]);
+      Serial.print(name_chair);
+      Serial.print(incomingData[1]);
+      Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
     }
@@ -100,8 +102,10 @@ void loop()
     { // If data comes from Node 03
       name_chair = "node_03";
       datasensor = incomingData[0];
-      Serial.print("From: ");
-      Serial.println(incomingData[1]);
+      Serial.print(name_chair);
+      Serial.print(incomingData[1]);
+      Serial.print("->node_03");
+      Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
     }
@@ -109,8 +113,10 @@ void loop()
     { // If data comes from Node 04
       name_chair = "node_04";
       datasensor = incomingData[0];
-      Serial.print("From: ");
-      Serial.println(incomingData[1]);
+      Serial.print(name_chair);
+      Serial.print(incomingData[1]);
+      Serial.print("->node_04");
+      Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
     }

@@ -198,9 +198,7 @@ void loop()
 //        Serial.println(ok);
         Serial.print("node_");
         Serial.print(Data[address]);
-        Serial.print("->node_");
-        Serial.print(node_server_01);
-        Serial.println("->sink_node");
+        Serial.print("->");
         Serial.print("Weight: ");
         Serial.println(Data[weight]);
 //        Serial.print("Final Destination\t: ");
