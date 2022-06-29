@@ -192,27 +192,24 @@ void loop()
         {
             if (!radio.isAckPayloadAvailable())
             {
-                Serial.println("-----------SUCCESS-----------");
+                Serial.print("Success ");
                 failed_send_to_branch_stack = 0;
             }
             else
             {
-                Serial.println("-- Acknowledge but no data --");
+                Serial.print("Acknowledge ");
             }
         }
         // Jika data gagal dikirim, maka
         else
         {
-            Serial.println("---------FAILED---------");
+            Serial.print("Failed ");
         }
         //  Data langsung di stop untuk dikirim
-//        Serial.print("Status\t: ");
-//        Serial.println(ok);
-        Serial.print("From\t: ");
-        Serial.println(Data[address]);
-        Serial.print("To\t: ");
-        Serial.println(master00);
-        Serial.print("Weight\t: ");
+        Serial.print("node_");
+        Serial.print(Data[address]);
+        Serial.println("->sink_node");
+        Serial.print("Weight: ");
         Serial.println(Data[weight]);
         stat_just_one_time_send = false;
     }
@@ -229,11 +226,6 @@ void loop()
 // Multihop ada disini
 void ReadSendClientMultiHop(uint16_t node_client, RF24NetworkHeader headerToSend)
 {
-    // Jika data yang masuk dari node client maka
-    Serial.println("---------SERVER 2 READY TO FORWARD---------");
-    Serial.print("From: ");
-    Serial.println(node_client);
-
     // Inisialisasi variabel ke CopyFromClient karena master hanya menerima Data dengan array index 2 saja, kalau 3 nanti error. Maka dari itu di pindahkan sementara ke CopyFromClient
     CopyFromClient[address] = incomingData[address];
     CopyFromClient[weight] = incomingData[weight];
@@ -246,28 +238,26 @@ void ReadSendClientMultiHop(uint16_t node_client, RF24NetworkHeader headerToSend
         bool ok = network.write(headerToSend, &CopyFromClient, sizeof(CopyFromClient));
         if (ok)
         {
-            Serial.println("------FORWARD BY SERVER 02 ------");
             if (!radio.isAckPayloadAvailable())
             {
-                Serial.println("-----------SUCCESS-----------");
+                Serial.print("Success ");
             }
             else
             {
-                Serial.println("-- Acknowledge but no data --");
+                Serial.println("Acknowledge ");
             }
         }
         // Jika data gagal dikirim, maka
         else
         {
-            Serial.println("---------FAILED---------");
+            Serial.println("Failed\t");
         }
-//        Serial.print("Status\t: ");
-//        Serial.println(ok);
-        Serial.print("From\t: ");
-        Serial.println(CopyFromClient[address]);
-        Serial.print("To\t: ");
-        Serial.println(master00);
-        Serial.print("Weight\t: ");
+        Serial.print("node_");
+        Serial.print(CopyFromClient[address]);
+        Serial.print("->node_");
+        Serial.print(this_node);
+        Serial.println("->sink_node");
+        Serial.print("Weight: ");
         Serial.println(CopyFromClient[weight]);
     }
 }
