@@ -178,20 +178,21 @@ void loop()
         // Jika data berhasil dikirim, maka
         if (!ok)
         {
+            Serial.println("------FORWARD TO SERVER 2------");
             if (!radio.isAckPayloadAvailable())
             {
-                Serial.print("Success ");
+                Serial.println("-----------SUCCESS-----------");
                 failed_send_to_branch_stack = 0;
             }
             else
             {
-                Serial.print("Acknowledge ");
+                Serial.println("-- Acknowledge but no data --");
             }
         }
         // Jika data gagal dikirim, maka
         else
         {
-            Serial.print("Failed ");
+            Serial.println("---------FAILED---------");
         }
         //  Data langsung di stop untuk dikirim
 //        Serial.print("Status\t: ");

@@ -48,7 +48,6 @@ unsigned long previous_millis;
 uint16_t check_data_deviation = 0;    // variabel untuk menyimpan selisih data
 uint16_t data_before = 0;             // variabel untuk menyimpan data load cell sebelumnya
 int sit_timer = 0;                    // variabel untuk menyimpan waktu timer sit pengunjung
-int interval = 0;                    // variabel untuk menyimpan waktu timer sit pengunjung
 int stand_up_timer = 0;               // variabel untuk menyimpan waktu timer sit pengunjung
 int death = 0;                        // buat lock reset berat
 int failed_send_to_master_stack = 0;
@@ -182,9 +181,6 @@ void loop()
     {
         stat_just_one_time_send = false;
     }
-    if(interval <= 5){
-        stat_just_one_time_send = true;
-    }
     if (stat_just_one_time_send)
     {
         // Inisialisasi data alamat this_node
@@ -196,18 +192,18 @@ void loop()
         {
             if (!radio.isAckPayloadAvailable())
             {
-                Serial.print("Success ");
+                Serial.println("-----------SUCCESS-----------");
                 failed_send_to_branch_stack = 0;
             }
             else
             {
-                Serial.print("Acknowledge ");
+                Serial.println("-- Acknowledge but no data --");
             }
         }
         // Jika data gagal dikirim, maka
         else
         {
-            Serial.print("Failed ");
+            Serial.println("---------FAILED---------");
         }
         //  Data langsung di stop untuk dikirim
         Serial.print("node_");
@@ -230,6 +226,11 @@ void loop()
 // Multihop ada disini
 void ReadSendClientMultiHop(uint16_t node_client, RF24NetworkHeader headerToSend)
 {
+    // Jika data yang masuk dari node client maka
+    Serial.println("---------SERVER 1 READY TO FORWARD---------");
+    Serial.print("From: ");
+    Serial.println(node_client);
+
     // Inisialisasi variabel ke CopyFromClient karena master hanya menerima Data dengan array index 2 saja, kalau 3 nanti error. Maka dari itu di pindahkan sementara ke CopyFromClient
     CopyFromClient[address] = incomingData[address];
     CopyFromClient[weight] = incomingData[weight];
@@ -242,20 +243,23 @@ void ReadSendClientMultiHop(uint16_t node_client, RF24NetworkHeader headerToSend
         bool ok = network.write(headerToSend, &CopyFromClient, sizeof(CopyFromClient));
         if (!ok)
         {
+            Serial.println("------FORWARD BY SERVER 01------");
             if (!radio.isAckPayloadAvailable())
             {
-                Serial.print("Success ");
+                Serial.println("-----------SUCCESS-----------");
             }
             else
             {
-                Serial.print("Acknowledge ");
+                Serial.println("-- Acknowledge but no data --");
             }
         }
         // Jika data gagal dikirim, maka
         else
         {
-            Serial.print("Failed ");
+            Serial.println("---------FAILED---------");
         }
+//        Serial.print("Status\t: ");
+//        Serial.println(ok);
         Serial.print("node_");
         Serial.print(CopyFromClient[address]);
         Serial.print("->node_");
