@@ -48,6 +48,7 @@ unsigned long previous_millis;
 uint16_t check_data_deviation = 0;    // variabel untuk menyimpan selisih data
 uint16_t data_before = 0;             // variabel untuk menyimpan data load cell sebelumnya
 int sit_timer = 0;                    // variabel untuk menyimpan waktu timer sit pengunjung
+int interval = 0;                    // variabel untuk menyimpan waktu timer sit pengunjung
 int stand_up_timer = 0;               // variabel untuk menyimpan waktu timer sit pengunjung
 int death = 0;                        // buat lock reset berat
 int failed_send_to_master_stack = 0;  // variabel untuk menyimpan jumlah percobaan gagal pengiriman ke master
@@ -180,6 +181,9 @@ void loop()
     if (death > 1)
     {
         stat_just_one_time_send = false;
+    }
+    if(interval <= 5){
+        stat_just_one_time_send = true;
     }
     if (stat_just_one_time_send)
     {

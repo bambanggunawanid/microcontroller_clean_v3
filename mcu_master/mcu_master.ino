@@ -83,7 +83,6 @@ void loop()
       name_chair = "node_01";
       datasensor = incomingData[0];
       Serial.print(name_chair);
-      Serial.print(incomingData[1]);
       Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
@@ -93,7 +92,6 @@ void loop()
       name_chair = "node_02";
       datasensor = incomingData[0];
       Serial.print(name_chair);
-      Serial.print(incomingData[1]);
       Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
@@ -103,8 +101,7 @@ void loop()
       name_chair = "node_03";
       datasensor = incomingData[0];
       Serial.print(name_chair);
-      Serial.print(incomingData[1]);
-      Serial.print("->node_03");
+      Serial.print("->node_01");
       Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
@@ -114,8 +111,7 @@ void loop()
       name_chair = "node_04";
       datasensor = incomingData[0];
       Serial.print(name_chair);
-      Serial.print(incomingData[1]);
-      Serial.print("->node_04");
+      Serial.print("->node_02");
       Serial.println("->sink_node");
       Serial.print("Data : ");
       Serial.println(incomingData[0]);
